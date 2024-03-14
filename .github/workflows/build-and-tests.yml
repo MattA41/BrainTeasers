@@ -1,0 +1,22 @@
+name: Build and test the brain Teasers
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the code
+              uses: actions/chechout@v4
+            - name: Get dot net
+              uses: actions/setup-dotnet@v4
+              with:
+                 dotnet-verion: '8.0.x'
+            - name: Restore packages
+              run: dotnet restore
+            - name: Build the code
+              run: dotnet build
